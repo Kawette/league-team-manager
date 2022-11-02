@@ -1,32 +1,15 @@
 import axios from 'axios';
-import { ipcRenderer } from 'electron';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import Layout from '../components/Layout';
 import Button from '@mui/material/Button';
 
-interface LCUCredentials {
-  address: string;
-  port: number;
-  username: string;
-  password: string;
-  protocol: string;
-}
-
 const Home: FunctionComponent = () => {
 
-  const [credentials, setCredentials] = useState<LCUCredentials>(null);
-  const [history, setHistory] = useState(null);
-
-  useEffect(() => {
-    ipcRenderer.on('lcu-credentials', (event, credentials) => {
-      console.log(`LCU received credentials: ${JSON.stringify(credentials)}`);
-      setCredentials(credentials);
-    });
-    ipcRenderer.send('lcu-ready');
-  }, []);
-
+  const [history, setHistory] = useState([]);
+  
   return( 
     <Layout>
+      {/*
       {JSON.stringify(credentials)}
         <Button onClick={() => {
           axios.get(`${credentials.protocol}://${credentials.address}:${credentials.port}/lol-match-history/v1/products/lol/current-summoner/matches`, {
@@ -36,11 +19,12 @@ const Home: FunctionComponent = () => {
             }
           }).then((response) => {
             console.log(response.data);
-            setHistory(response.data);
+            setHistory(response.data);  
           });
         }}>
           Fetch history
-        </Button>
+        </Button>   
+        */}
         {JSON.stringify(history)}
     </Layout>
   );
