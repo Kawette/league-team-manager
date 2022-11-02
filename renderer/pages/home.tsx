@@ -1,7 +1,8 @@
-import { Button } from '@material-ui/core';
 import axios from 'axios';
 import { ipcRenderer } from 'electron';
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import Layout from '../components/Layout';
+import Button from '@mui/material/Button';
 
 interface LCUCredentials {
   address: string;
@@ -24,24 +25,24 @@ const Home: FunctionComponent = () => {
     ipcRenderer.send('lcu-ready');
   }, []);
 
-  return (
-    <>
+  return( 
+    <Layout>
       {JSON.stringify(credentials)}
-      <Button onClick={() => {
-        axios.get(`${credentials.protocol}://${credentials.address}:${credentials.port}/lol-match-history/v1/products/lol/current-summoner/matches`, {
-          auth: {
-            username: credentials.username,
-            password: credentials.password
-          }
-        }).then((response) => {
-          console.log(response.data);
-          setHistory(response.data);
-        });
-      }}>
-        Fetch history
-      </Button>
-      {JSON.stringify(history)}
-    </>
+        <Button onClick={() => {
+          axios.get(`${credentials.protocol}://${credentials.address}:${credentials.port}/lol-match-history/v1/products/lol/current-summoner/matches`, {
+            auth: {
+              username: credentials.username,
+              password: credentials.password
+            }
+          }).then((response) => {
+            console.log(response.data);
+            setHistory(response.data);
+          });
+        }}>
+          Fetch history
+        </Button>
+        {JSON.stringify(history)}
+    </Layout>
   );
 };
 

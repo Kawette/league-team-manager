@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { theme } from '../lib/theme';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
 
 export default function(props: AppProps) {
