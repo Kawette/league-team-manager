@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { theme } from '../lib/theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
+import Store from 'electron-store';
+import { ipcRenderer } from 'electron';
 
 export default function(props: AppProps) {
   const { Component, pageProps } = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);

@@ -1,15 +1,16 @@
+import { Button } from '@mui/material';
 import axios from 'axios';
 import React, { FunctionComponent, useState } from 'react';
 import Layout from '../components/Layout';
-import Button from '@mui/material/Button';
+import useLcu from '../hooks/useLcu';
 
 const Home: FunctionComponent = () => {
 
   const [history, setHistory] = useState([]);
-  
+  const { credentials } = useLcu();
+
   return( 
     <Layout>
-      {/*
       {JSON.stringify(credentials)}
         <Button onClick={() => {
           axios.get(`${credentials.protocol}://${credentials.address}:${credentials.port}/lol-match-history/v1/products/lol/current-summoner/matches`, {
@@ -24,7 +25,6 @@ const Home: FunctionComponent = () => {
         }}>
           Fetch history
         </Button>   
-        */}
         {JSON.stringify(history)}
     </Layout>
   );
