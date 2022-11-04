@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { FunctionComponent, useState } from 'react';
 import Layout from '../components/Layout';
 import useLcu from '../hooks/useLcu';
+import { getMatchHistory } from '../lib/lcu';
 
 const Home: FunctionComponent = () => {
 
@@ -11,21 +12,12 @@ const Home: FunctionComponent = () => {
 
   return( 
     <Layout>
-      {JSON.stringify(credentials)}
-        <Button onClick={() => {
-          axios.get(`${credentials.protocol}://${credentials.address}:${credentials.port}/lol-match-history/v1/products/lol/current-summoner/matches`, {
-            auth: {
-              username: credentials.username,
-              password: credentials.password
-            }
-          }).then((response) => {
-            console.log(response.data);
-            setHistory(response.data);  
-          });
-        }}>
-          Fetch history
-        </Button>   
-        {JSON.stringify(history)}
+      <Button onClick={async () => {
+        
+        const result = await getMatchHistory(credentials);
+        console.log(result);
+
+      }}>Ajouter une game</Button>
     </Layout>
   );
 };

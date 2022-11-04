@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Store from "electron-store";
 
 const useLcu = () => {
-  const [credentials, setCredentials] = useState(null);
+  const [credentials, setCredentials] = useState<any | null>(null);
 
   useEffect(() => {
     const store = new Store({ watch: true });

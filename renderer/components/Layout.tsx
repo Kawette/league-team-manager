@@ -20,6 +20,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import { useEffect, useState } from "react";
 import { ipcRenderer } from "electron";
 import Store from "electron-store";
+import useLcu from "../hooks/useLcu";
 
 // LCU Context
 interface LCUCredentials {
@@ -37,19 +38,7 @@ interface LayoutProps {
 
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
 
-  const [credentials, setCredentials] = useState(null);
-
-  useEffect(() => {
-    const store = new Store({ watch: true });
-
-    const credentials = store.get('lcu.credentials');
-    setCredentials(credentials);
-
-    store.onDidChange('lcu.credentials', (credentials) => {
-      console.log(`LCU credentials updated: ${JSON.stringify(credentials)}`);
-      setCredentials(credentials ?? null);
-    });
-  }, []);
+  const { credentials } = useLcu();
 
   return (
     <Box sx={{ display: "flex" }}>
